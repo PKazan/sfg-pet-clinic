@@ -7,7 +7,9 @@ import java.util.Set;
 
 public abstract class AbstractMapService<T, ID> {
 
-    protected Map<ID, T> map = new HashMap<>();
+    protected Map<Long, T> map = new HashMap<>();
+
+    private Long id = 0L;
 
     Set<T> findAll() {
         return new HashSet<>(map.values());
@@ -17,8 +19,13 @@ public abstract class AbstractMapService<T, ID> {
         return map.get(id);
     }
 
-    T save(ID id, T object) {
+    T save(T object) {
         return map.put(id, object);
+    }
+
+    protected Long getNextId() {
+        return ++id;
+
     }
 
     void delete(T object) {
